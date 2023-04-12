@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+
+<div class="row justify-content-center my-4">
+    <div class="col-6">
+        <h5 class="text-center text-light text_shadow display-6 fw-normal">Your pictures:</h5>
+    </div>
+</div>
+
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-sm-6 col-md-3">
+                <div class="card my-4">
+                    {% thumbnail post.image "200x200" crop="center" as im %}
+                        <img src="{{ im.url }}" class="card-img-top" alt="...">
+                    {% endthumbnail %}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <h4>{{ post.title }}</h4>
+                        </h5>
+                        <p class="card-text">{{ post.text }}</p>
+                        <a href="{% url 'feed:detail' post.id %}" class="btn btn-success">Click for the details</a>
+                        <p class="pt-3">Created: {{ post.date_view }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-sm-6 offset-3 text-center py-5 my-5 text-light">
+                <h3>Welcome!</h3>
+                <p>Are you ready to post your first picture?</p>
+                <a href="{% url 'feed:post' %}" class="btn btn-lg btn-success">Upload Image</a>
+                <h4 class="text-light text_shadow">Current time is: {% now 'Y.m.d' %}</h4>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

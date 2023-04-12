@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block additional_styles %}
+<style>
+    body {
+     background-image: url(https://papers.co/wallpaper/papers.co-vm27-poly-art-abstract-purple-pattern-29-wallpaper.jpg);
+     background-size: cover;
+    }
+ </style>
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-10 offset-sm-1 py-4 text-center text-light text_shadow">
+            <h3>{{ object.title }}</h3>
+            <p>{{ object.text }}</p>
+            <h6>Created: {{ object.date_view }}</h6>
+            <img src="{{ object.image.url }}" class="img-fluid rounded ">
+        </div>
+    </div>
+{% endblock %}
